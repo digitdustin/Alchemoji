@@ -1,0 +1,71 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+}
+
+.logo-holder {
+    width: 100%;
+    height: 70px;
+    font-size: 28px;
+    background-color:  rgba(0, 0, 0, 0.3);
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.element-list{
+    height:100vh;
+    width: 270px;
+    flex-shrink: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    flex-direction: column;
+    z-index: 2;
+    position: fixed;
+}
+
+/* Prevents inconsistent highlighting of element while being dragged
+   Copied from https://stackoverflow.com/questions/826782 */
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome and Opera */
+}
+
+.workspace{
+    background-image: linear-gradient(165deg, #312F2F, #22181C);
+    height:100vh;
+    flex-grow: 1;
+    color: white;
+}
+
+.element {
+    display: flex;
+    padding-left: 40px;
+    align-items: center;
+    padding-top: 5px;
+    justify-content: flex-start;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    list-style-type: none;
+}
+
+.element-img {
+    font-size: 40px;
+    cursor: grab;
+    padding-right: 30px;
+}
+
+.element h1 {
+    font-size: 20px;
+}
