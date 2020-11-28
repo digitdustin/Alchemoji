@@ -14,7 +14,7 @@ allElements.forEach((elem) => {
 
 
 //Functions
-function addElement(event, elem) {
+function addElement(event) {
     event.preventDefault();
     //create new element div
     const element = document.createElement("div");
@@ -22,7 +22,7 @@ function addElement(event, elem) {
     //create new element emoji li
     const elementImg = document.createElement("li");
     elementImg.classList.add("element-img");
-    elementImg.innerText = elem.innerText;
+    elementImg.innerHTML = '<i class="twa twa-question"></i>';
     element.appendChild(elementImg);
     //create new element text li
     const elementTxt = document.createElement("h1");
@@ -31,6 +31,7 @@ function addElement(event, elem) {
     element.appendChild(elementTxt);
     //append element to elementlist
     elementList.appendChild(element);
+    elementImg.addEventListener('mousedown', drag, true);
 }
 
 //moving element out of list into workspace
@@ -60,7 +61,14 @@ function drag(event) {
 
     workspace.appendChild(div);
 
-    document.addEventListener('mouseup', () => {
+    div.addEventListener('mouseup', (e) => {
+        
+        var pos = elementList.getBoundingClientRect();
+        if (e.clientX < pos.right) {
+            div.remove();
+        } else {
+            div.addEventListener('mousedown', move, true);
+        }
         isDown = false;
     }, true);
 
@@ -76,7 +84,7 @@ function drag(event) {
         }
     }, true);
 
-    div.addEventListener('mousedown', move, true);
+    
 }
 
 //for moving element in workspace
@@ -97,8 +105,12 @@ function move(event) {
 
     workspace.appendChild(div);
 
-    document.addEventListener('mouseup', () => {
+    div.addEventListener('mouseup', (e) => {
         isDown = false;
+        var pos = elementList.getBoundingClientRect();
+        if (e.clientX < pos.right) {
+            div.remove();
+        } 
     }, true);
 
     document.addEventListener('mousemove', (e) => {
@@ -112,6 +124,7 @@ function move(event) {
             div.style.top = (mousePosition.y - 30) + 'px';
         }
     }, true);
+
 }
 
 
