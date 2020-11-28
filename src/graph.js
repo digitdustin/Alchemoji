@@ -7,19 +7,19 @@ class Graph {
         this.adjacencyList[vertex] = [];
       }
     }
-    addEdge(source, destination) {
-      if (!this.adjacencyList[source]) {
-        this.addVertex(source);
+    addEdge(to, from) {
+      if (!this.adjacencyList[to]) {
+        this.addVertex(to);
       }
-      if (!this.adjacencyList[destination]) {
-        this.addVertex(destination);
+      if (!this.adjacencyList[from]) {
+        this.addVertex(from);
       }
-      this.adjacencyList[source].push(destination);
-      this.adjacencyList[destination].push(source);
+      this.adjacencyList[to].push(from);
+      this.adjacencyList[from].push(to);
     }
-    removeEdge(source, destination) {
-      this.adjacencyList[source] = this.adjacencyList[source].filter(vertex => vertex !== destination);
-      this.adjacencyList[destination] = this.adjacencyList[destination].filter(vertex => vertex !== source);
+    removeEdge(to, from) {
+      this.adjacencyList[to] = this.adjacencyList[to].filter(vertex => vertex !== from);
+      this.adjacencyList[from] = this.adjacencyList[from].filter(vertex => vertex !== to);
     }
     removeVertex(vertex) {
       while (this.adjacencyList[vertex]) {
@@ -29,3 +29,10 @@ class Graph {
       delete this.adjacencyList[vertex];
     }  
   }
+
+  var elementGraph = new Graph();
+  elementGraph.addEdge('water', ['fire', 'steam']);
+  elementGraph.addEdge('water', ['earth', 'mud']);
+  elementGraph.addEdge('water', ['air', 'wind']);
+
+  export default elementGraph;

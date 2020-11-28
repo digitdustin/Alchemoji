@@ -50,13 +50,13 @@
 .twa-fire {
     background-image: url("https://twemoji.maxcdn.com/2/svg/1f525.svg"); }
 
-.twa-droplet {
+.twa-water {
   background-image: url("https://twemoji.maxcdn.com/2/svg/1f4a7.svg"); }
   
-.twa-mountain {
+.twa-earth {
     background-image: url("https://twemoji.maxcdn.com/2/svg/26f0.svg"); }
   
-.twa-fog {
+.twa-air {
     background-image: url("https://twemoji.maxcdn.com/2/svg/1f32b.svg"); }
   
 .twa-question-mark {
@@ -66,4 +66,7 @@
   background-image: url("https://twemoji.maxcdn.com/2/svg/2753.svg"); }
 
 .twa-white-question-mark {
+  background-image: url("https://twemoji.maxcdn.com/2/svg/2754.svg"); }
+
+.twa-name {
   background-image: url("https://twemoji.maxcdn.com/2/svg/2754.svg"); }
