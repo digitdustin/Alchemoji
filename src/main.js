@@ -91,13 +91,11 @@ function drag(event) {
     div.style.position = "absolute";
     div.classList.add('element-img');
     div.classList.add('workspace-element');
-    div.style.left = event.clientX - 20 + "px";
-    div.style.top = event.clientY - 20 + "px";
+    div.style.left = event.clientX - 30 + "px";
+    div.style.top = event.clientY - 30 + "px";
     div.style.width = "40px";
     div.innerHTML = this.innerHTML;
     div.style.zIndex = 2;
-
-    
 
     workspace.appendChild(div);
 
@@ -123,7 +121,6 @@ function drag(event) {
             div.style.top = (mousePosition.y - 30) + 'px';
         }
     }, true);
-
     
 }
 
@@ -157,9 +154,27 @@ function move(event) {
         if (isTouching) {
             console.log('MATCH!');
             var activeElemText = (div.innerHTML).substring(18, div.innerHTML.lastIndexOf("\""));
-            console.log(activeElemText);
-            console.log(touchingElemText);
-            checkCombination(activeElemText, touchingElemText);
+            
+            var newElemName = checkCombination(activeElemText, touchingElemText);
+            console.log(newElemName);
+            if (newElemName != -1) {
+                //replace combined elements with new element
+                touchingElem.remove();
+                div.remove();
+                var newElem = document.createElement("div");
+                newElem.style.position = "absolute";
+                newElem.classList.add('element-img');
+                newElem.classList.add('workspace-element');
+                newElem.style.left = e.clientX - 30 + "px";
+                newElem.style.top = e.clientY - 30 + "px";
+                newElem.style.width = "40px";
+                newElem.innerHTML = `<i class="twa twa-${newElemName}"></i>`;
+                newElem.style.zIndex = 2;
+
+                workspace.appendChild(newElem);
+
+                newElem.addEventListener('mousedown', move, true);
+            }
         }
     }, true);
 
@@ -198,11 +213,19 @@ function move(event) {
 //checks if two elements forms a combination
 function checkCombination(elem1, elem2) {
     if (!elementGraph.adjacencyList[elem1]) {
-        return;
+        return -1;
     }
     for (let i = 0; i < elementGraph.adjacencyList[elem1].length; i++) {
         if (elementGraph.adjacencyList[elem1][i][0] == elem2) {
             console.log(`${elementGraph.adjacencyList[elem1][i][1]} has been formed`);
+            //add new combination to element list
+            if (!elementsFound.includes(elementGraph.adjacencyList[elem1][i][1])) {
+                elementsFound.push(elementGraph.adjacencyList[elem1][i][1]);
+            }
+            sortElements();
+            return elementGraph.adjacencyList[elem1][i][1];
         }
     }
+    //if no combination found
+    return -1;
 }
