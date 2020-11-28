@@ -53,7 +53,7 @@ function drag(event) {
     div.style.left = event.clientX - 20 + "px";
     div.style.top = event.clientY - 20 + "px";
     div.style.width = "40px";
-    div.innerText = this.innerText;
+    div.innerHTML = this.innerHTML;
     div.style.zIndex = 2;
 
     
@@ -71,8 +71,8 @@ function drag(event) {
                 x : e.clientX,
                 y : e.clientY
             };
-            div.style.left = (mousePosition.x - 20) + 'px';
-            div.style.top = (mousePosition.y - 20) + 'px';
+            div.style.left = (mousePosition.x - 30) + 'px';
+            div.style.top = (mousePosition.y - 30) + 'px';
         }
     }, true);
 
@@ -94,15 +94,6 @@ function move(event) {
     //create new div
     
     var div = this;
-    div.style.position = "absolute";
-    div.classList.add('element-img');
-    div.style.left = event.clientX - 20 + "px";
-    div.style.top = event.clientY - 20 + "px";
-    div.style.width = "40px";
-    div.innerText = this.innerText;
-    div.style.zIndex = 2;
-
-    
 
     workspace.appendChild(div);
 
@@ -117,8 +108,8 @@ function move(event) {
                 x : e.clientX,
                 y : e.clientY
             };
-            div.style.left = (mousePosition.x - 20) + 'px';
-            div.style.top = (mousePosition.y - 20) + 'px';
+            div.style.left = (mousePosition.x - 30) + 'px';
+            div.style.top = (mousePosition.y - 30) + 'px';
         }
     }, true);
 }
