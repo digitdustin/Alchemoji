@@ -6,6 +6,12 @@ const workspace = document.querySelector('.workspace');
 //const element = document.querySelector('.element');
 var allElements = document.querySelectorAll('.element-img');
 
+//all elements available
+var elementsFound = ['fire','water','air','earth'];
+
+sortElements();
+var counter = document.createElement("div");
+createCounter();
 
 //Button Listeners
 elementList.addEventListener('click', addElement);
@@ -14,12 +20,19 @@ allElements.forEach((elem) => {
     elem.addEventListener('mousedown', drag, true);
 });
 
+//counter creation
+function createCounter() {
+    counter.classList.add("counter");
+    counter.style.right = 0;
+    counter.style.bottom = 0;
+    workspace.appendChild(counter);
+    counter.innerHTML = `<h1>${elementsFound.length}/200</h1>`
+}
 
 
-//all elements available
-var elementsFound = ['fire','water','air','earth'];
-
-sortElements();
+function updateCounter() {
+    counter.innerHTML = `<h1>${elementsFound.length}/500</h1>`
+}
 
 
 //resorts element list and redisplays everything
@@ -227,6 +240,7 @@ function checkCombination(elem1, elem2) {
             //add new combination to element list
             if (!elementsFound.includes(elementGraph.adjacencyList[elem1][i][1])) {
                 elementsFound.push(elementGraph.adjacencyList[elem1][i][1]);
+                updateCounter();
             }
             sortElements();
             return elementGraph.adjacencyList[elem1][i][1];
