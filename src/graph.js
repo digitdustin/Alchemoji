@@ -32,7 +32,17 @@ class Graph {
 
   var elementGraph = new Graph();
   elementGraph.addEdge('water', ['fire', 'steam']);
+  elementGraph.addEdge('fire', ['water', 'steam']);
+
   elementGraph.addEdge('water', ['earth', 'mud']);
-  elementGraph.addEdge('water', ['air', 'wind']);
+  elementGraph.addEdge('earth', ['water', 'mud']);
+
+  elementGraph.addEdge('water', ['air', 'cloud']);
+  elementGraph.addEdge('air', ['water', 'cloud']);
+
+  elementGraph.addEdge('water', ['water', 'sea']);
+  
+  elementGraph.addEdge('earth', ['fire', 'volcano']);
+  elementGraph.addEdge('fire', ['earth', 'volcano']);
 
   export default elementGraph;
