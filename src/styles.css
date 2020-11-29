@@ -11,7 +11,7 @@ body {
 .logo-holder {
     width: 100%;
     height: 80px;
-    font-size: 28px;
+    font-size: 30px;
     
     background-color:  rgba(0, 0, 0, 0.3);
 
@@ -73,9 +73,10 @@ body {
 .element {
     display: flex;
     padding-left: 40px;
+    padding-right: 80px;
     align-items: center;
-    padding-top: 5px;
-    justify-content: flex-start;
+    padding-top: 20px;
+    justify-content: flex-end;
     color: white;
     font-family: 'Texturina', serif;
     font-weight: 200;
@@ -84,10 +85,10 @@ body {
 
 .element-img {
     font-size: 60px;
-    cursor: grab;
-    padding-right: 30px;
+    cursor: grab;   
 }
 
 .element h1 {
     font-size: 20px;
+    padding-right: 30px;
 }

@@ -14,6 +14,8 @@ allElements.forEach((elem) => {
     elem.addEventListener('mousedown', drag, true);
 });
 
+
+
 //all elements available
 var elementsFound = ['fire','water','air','earth'];
 
@@ -33,16 +35,16 @@ function sortElements() {
         //create new element div
         const element = document.createElement("div");
         element.classList.add("element");
-        //create new element emoji li
-        const elementImg = document.createElement("li");
-        elementImg.classList.add("element-img");
-        elementImg.innerHTML = `<i class="twa twa-${elementsFound[i]}"></i>`;
-        element.appendChild(elementImg);
         //create new element text li
         const elementTxt = document.createElement("h1");
         elementTxt.classList.add("element-name");
         elementTxt.innerText = elementsFound[i];
         element.appendChild(elementTxt);
+        //create new element emoji li
+        const elementImg = document.createElement("li");
+        elementImg.classList.add("element-img");
+        elementImg.innerHTML = `<i class="twa twa-${elementsFound[i]}"></i>`;
+        element.appendChild(elementImg);
         //append element to elementlist
         elementList.appendChild(element);
         elementImg.addEventListener('mousedown', drag, true);
@@ -78,11 +80,15 @@ function drag(event) {
     console.log('drag start');
     event.preventDefault();
     var mousePosition;
-    
+    console.log(this.getBoundingClientRect());
+
+    var originalPosition = this.getBoundingClientRect();
+
     var offset = [
-        event.clientX,
-        event.clientY
+        event.clientX - originalPosition.left,
+        event.clientY - originalPosition.top
     ];
+    console.log(offset);
     var isDown = true;
 
     //create new div
@@ -91,9 +97,9 @@ function drag(event) {
     div.style.position = "absolute";
     div.classList.add('element-img');
     div.classList.add('workspace-element');
-    div.style.left = event.clientX - 30 + "px";
-    div.style.top = event.clientY - 30 + "px";
-    div.style.width = "40px";
+
+    div.style.left = event.clientX - offset[0] + "px";
+    div.style.top = event.clientY - offset[1] + "px";
     div.innerHTML = this.innerHTML;
     div.style.zIndex = 2;
 
@@ -117,8 +123,8 @@ function drag(event) {
                 x : e.clientX,
                 y : e.clientY
             };
-            div.style.left = (mousePosition.x - 30) + 'px';
-            div.style.top = (mousePosition.y - 30) + 'px';
+            div.style.left = (mousePosition.x - offset[0]) + 'px';
+            div.style.top = (mousePosition.y - offset[1]) + 'px';
         }
     }, true);
     
