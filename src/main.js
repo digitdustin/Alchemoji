@@ -39,7 +39,7 @@ function createCounter() {
 
 
 function updateCounter() {
-    counter.innerHTML = `<h1>${elementsFound.length}/500</h1>`
+    counter.innerHTML = `<h1>${elementsFound.length}/200</h1>`
 }
 
 
@@ -102,6 +102,7 @@ function drag(event) {
     event.preventDefault();
     var mousePosition;
     console.log(this.getBoundingClientRect());
+    var isTouching = false;
 
     var originalPosition = this.getBoundingClientRect();
 
@@ -111,6 +112,11 @@ function drag(event) {
     ];
     console.log(offset);
     var isDown = true;
+    
+    event.preventDefault();
+
+    var touchingElem;
+    var touchingElemText;
 
     //create new div
     
@@ -127,27 +133,70 @@ function drag(event) {
     workspace.appendChild(div);
 
     div.addEventListener('mouseup', (e) => {
-        
+        isDown = false;
         var pos = elementList.getBoundingClientRect();
         if (e.clientX < pos.right) {
             div.remove();
-        } else {
-            div.addEventListener('mousedown', move, true);
+        } 
+        if (isTouching) {
+            console.log('MATCH!');
+            var activeElemText = (div.innerHTML).substring(18, div.innerHTML.lastIndexOf("\""));
+            
+            var newElemName = checkCombination(activeElemText, touchingElemText);
+            console.log(newElemName);
+            if (newElemName != -1) {
+                //replace combined elements with new element
+                touchingElem.remove();
+                div.remove();
+                var newElem = document.createElement("div");
+                newElem.style.position = "absolute";
+                newElem.classList.add('element-img');
+                newElem.classList.add('workspace-element');
+                newElem.style.left = e.clientX - 30 + "px";
+                newElem.style.top = e.clientY - 30 + "px";
+                newElem.style.width = "40px";
+                newElem.innerHTML = `<i class="twa twa-${newElemName}"></i>`;
+                newElem.style.zIndex = 2;
+
+                workspace.appendChild(newElem);
+
+                newElem.addEventListener('mousedown', move, true);
+            }
         }
-        isDown = false;
     }, true);
 
     document.addEventListener('mousemove', (e) => {
         e.preventDefault();
+        isTouching = false;
         if (isDown) {
             mousePosition = {
                 x : e.clientX,
                 y : e.clientY
             };
+
+            //check if div is touching another element in the workspace
+            const workspaceElements = document.querySelectorAll('.workspace-element');
+            workspaceElements.forEach((elem) => {
+                var pos = elem.getBoundingClientRect();
+                if (mousePosition.x < pos.right && mousePosition.x > pos.left && elem != div) {
+                    if (mousePosition.y > pos.top && mousePosition.y < pos.bottom) {
+                        //check if mouse is within bounds of another workspace element
+                        isTouching = true;
+                        //touchingElem contains the element it is touching (in case of combination => removal from workspace)
+                        touchingElem = elem;
+                        //touchingElemText contains the text value of the element (fire, earth, etc.)
+                        touchingElemText = (elem.innerHTML).substring(18, elem.innerHTML.lastIndexOf("\""));
+                        console.log(touchingElemText);
+                    }
+                }
+            });
+
             div.style.left = (mousePosition.x - offset[0]) + 'px';
             div.style.top = (mousePosition.y - offset[1]) + 'px';
         }
     }, true);
+
+    div.addEventListener('mousedown', move, true);
     
 }
 
@@ -156,10 +205,11 @@ function move(event) {
     console.log('move start');
     event.preventDefault();
     var mousePosition;
+    var originalPosition = this.getBoundingClientRect();
     
     var offset = [
-        event.clientX,
-        event.clientY
+        event.clientX - originalPosition.left,
+        event.clientY - originalPosition.top
     ];
     var isDown = true;
     var isTouching = false;
@@ -231,10 +281,12 @@ function move(event) {
                 }
             });
 
-            div.style.left = (mousePosition.x - 30) + 'px';
-            div.style.top = (mousePosition.y - 30) + 'px';
+            div.style.left = (mousePosition.x - offset[0]) + 'px';
+            div.style.top = (mousePosition.y - offset[1]) + 'px';
         }
     }, true);
+
+    div.addEventListener('mousedown', move, true);
 }
 
 //checks if two elements forms a combination
