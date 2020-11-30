@@ -13,6 +13,14 @@ sortElements();
 var counter = document.createElement("div");
 createCounter();
 
+var github = document.createElement("div");
+github.classList.add("github");
+github.style.right = 0;
+github.style.top = 0;
+github.innerHTML = `<a href="https://github.com/digitdustin/Alchemoji"></a>`;
+workspace.appendChild(github);
+
+
 //Button Listeners
 elementList.addEventListener('click', addElement);
 //element.addEventListener('mousedown', drag, true);
