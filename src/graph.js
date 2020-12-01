@@ -45,4 +45,28 @@ class Graph {
   elementGraph.addEdge('earth', ['fire', 'volcano']);
   elementGraph.addEdge('fire', ['earth', 'volcano']);
 
+  elementGraph.addEdge('cloud', ['air', 'sky']);
+  elementGraph.addEdge('air', ['cloud', 'sky']);
+
+  elementGraph.addEdge('water', ['sea', 'ocean']);
+  elementGraph.addEdge('sea', ['sea', 'ocean']);
+  elementGraph.addEdge('sea', ['water', 'ocean']);
+
+  elementGraph.addEdge('volcano', ['air', 'stone']);
+  elementGraph.addEdge('air', ['volcano', 'stone']);
+
+  elementGraph.addEdge('mud', ['fire', 'brick']);
+  elementGraph.addEdge('fire', ['mud', 'brick']);
+  
+  elementGraph.addEdge('brick', ['brick', 'house']);
+  
+  elementGraph.addEdge('house', ['house', 'village']);
+
+  elementGraph.addEdge('village', ['village', 'city']);
+
+  elementGraph.addEdge('stone', ['water', 'fountain']);
+  elementGraph.addEdge('water', ['stone', 'fountain']);
+
+  
+
   export default elementGraph;
