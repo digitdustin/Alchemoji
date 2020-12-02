@@ -152,8 +152,8 @@ function drag(event) {
                 newElem.style.position = "absolute";
                 newElem.classList.add('element-img');
                 newElem.classList.add('workspace-element');
-                newElem.style.left = e.clientX - 30 + "px";
-                newElem.style.top = e.clientY - 30 + "px";
+                newElem.style.left = e.clientX - 35 + "px";
+                newElem.style.top = e.clientY - 35 + "px";
                 newElem.style.width = "40px";
                 newElem.innerHTML = `<i class="twa twa-${newElemName}"></i>`;
                 newElem.style.zIndex = 2;
