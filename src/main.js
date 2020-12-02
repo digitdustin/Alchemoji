@@ -143,8 +143,12 @@ function drag(event) {
             var activeElemText = (div.innerHTML).substring(18, div.innerHTML.lastIndexOf("\""));
             
             var newElemName = checkCombination(activeElemText, touchingElemText);
+
             console.log(newElemName);
             if (newElemName != -1) {
+                //get touching element's parameters for new params position
+                var newElemParam = touchingElem.getBoundingClientRect();
+
                 //replace combined elements with new element
                 touchingElem.remove();
                 div.remove();
@@ -152,8 +156,8 @@ function drag(event) {
                 newElem.style.position = "absolute";
                 newElem.classList.add('element-img');
                 newElem.classList.add('workspace-element');
-                newElem.style.left = e.clientX - 35 + "px";
-                newElem.style.top = e.clientY - 35 + "px";
+                newElem.style.left = newElemParam.left + "px";
+                newElem.style.top = newElemParam.top + "px";
                 newElem.style.width = "40px";
                 newElem.innerHTML = `<i class="twa twa-${newElemName}"></i>`;
                 newElem.style.zIndex = 2;
@@ -233,8 +237,14 @@ function move(event) {
             var activeElemText = (div.innerHTML).substring(18, div.innerHTML.lastIndexOf("\""));
             
             var newElemName = checkCombination(activeElemText, touchingElemText);
+
+
+
             console.log(newElemName);
             if (newElemName != -1) {
+                //get touching element's parameters for new params position
+                var newElemParam = touchingElem.getBoundingClientRect();
+
                 //replace combined elements with new element
                 touchingElem.remove();
                 div.remove();
@@ -242,8 +252,8 @@ function move(event) {
                 newElem.style.position = "absolute";
                 newElem.classList.add('element-img');
                 newElem.classList.add('workspace-element');
-                newElem.style.left = e.clientX - 30 + "px";
-                newElem.style.top = e.clientY - 30 + "px";
+                newElem.style.left = newElemParam.left + "px";
+                newElem.style.top = newElemParam.top + "px";
                 newElem.style.width = "40px";
                 newElem.innerHTML = `<i class="twa twa-${newElemName}"></i>`;
                 newElem.style.zIndex = 2;
