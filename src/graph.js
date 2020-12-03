@@ -67,6 +67,8 @@ class Graph {
   elementGraph.addEdge('stone', ['water', 'fountain']);
   elementGraph.addEdge('water', ['stone', 'fountain']);
 
-  
+  elementGraph.addEdge('water', ['stone', 'fountain']);
+  elementGraph.addEdge('water', ['stone', 'fountain']);
+
 
   export default elementGraph;
