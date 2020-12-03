@@ -70,10 +70,32 @@ class Graph {
   elementGraph.addEdge('water', ['stone', 'fountain']);
   elementGraph.addEdge('water', ['stone', 'fountain']);
 
+  elementGraph.addEdge('stone', ['ocean', 'sand']);
+  elementGraph.addEdge('ocean', ['stone', 'sand']);
+  elementGraph.addEdge('stone', ['sea', 'sand']);
+  elementGraph.addEdge('sea', ['stone', 'sand']);
 
+  elementGraph.addEdge('sand', ['fire', 'glass']);
+  elementGraph.addEdge('fire', ['sand', 'glass']);
 
+  elementGraph.addEdge('stone', ['fire', 'metal']);
+  elementGraph.addEdge('fire', ['stone', 'metal']);
 
-  
+  elementGraph.addEdge('metal', ['lightning', 'electricity']);
+  elementGraph.addEdge('lightning', ['metal', 'electricity']);
 
+  elementGraph.addEdge('cloud', ['water', 'rain']);
+  elementGraph.addEdge('water', ['cloud', 'rain']);
+
+  elementGraph.addEdge('rain', ['sky', 'storm']);
+  elementGraph.addEdge('sky', ['rain', 'storm']);
+
+  elementGraph.addEdge('storm', ['fire', 'lightning']);
+  elementGraph.addEdge('fire', ['storm', 'lightning']);
+
+  elementGraph.addEdge('ocean', ['electricity', 'life']);
+  elementGraph.addEdge('electricity', ['ocean', 'life']);
+  elementGraph.addEdge('sea', ['electricity', 'life']);
+  elementGraph.addEdge('electricity', ['sea', 'life']);
 
   export default elementGraph;
