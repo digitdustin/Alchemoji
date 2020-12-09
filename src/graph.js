@@ -98,4 +98,7 @@ class Graph {
   elementGraph.addEdge('sea', ['electricity', 'life']);
   elementGraph.addEdge('electricity', ['sea', 'life']);
 
+  elementGraph.addEdge('fire', ['sky', 'sun']);
+  elementGraph.addEdge('sky', ['fire', 'sun']);
+
   export default elementGraph;
